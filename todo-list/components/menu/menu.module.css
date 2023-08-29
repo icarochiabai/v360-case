@@ -1,0 +1,43 @@
+.taskMenu {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+
+    background-color: #ededed;
+}
+
+.taskMenu button {
+    background-color: #ededed;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid #b0b0b0;
+    font-weight: bold;
+    font-size: larger;
+
+    transition: background-color 0.4s ease-out;
+}
+
+.taskMenu button:hover {
+    background-color: #cfcfcf;
+    cursor: pointer;
+}
+
+
+.listMenu {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+
+    background-color: #ededed;
+}
+
+.lists {
+    border-bottom: 1px solid #0d0d0d;
+}
+
+.lists h1 {
+    border-bottom: 1px solid #0d0d0d;
+}
+
