@@ -1,0 +1,19 @@
+.box {
+    display: flex;
+    flex-direction: column;
+
+    width: fit-content;
+    padding: 1rem;
+
+    border-radius: 0.5rem;
+    border: 2px dashed gray;
+
+    background-color: var(--task-background);
+    color: aliceblue;
+    transition: background-color 0.4s ease-out;
+}
+
+.box:hover {
+    background-color: var(--task-backgroundActive);
+    cursor: pointer;
+}
