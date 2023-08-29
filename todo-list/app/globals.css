@@ -16,3 +16,9 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+
+:root {
+  --task-background: #0000aa;
+  --task-backgroundActive: #000080;
+}
