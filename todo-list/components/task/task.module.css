@@ -17,3 +17,7 @@
     background-color: var(--task-backgroundActive);
     cursor: pointer;
 }
+
+.box[data-active="true"] {
+    background-color: var(--task-backgroundActive);
+}
