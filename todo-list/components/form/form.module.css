@@ -1,0 +1,28 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    border: 1px solid black;
+    padding: 2rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: #e0e0e0;
+}
+
+.form[data-active="false"] {
+    display: none;
+}
+
+.form label {
+    font-size: 16pt;
+    font-weight: bolder;
+}
+
+.form input {
+    border: none;
+    border-bottom: 1px solid gray;
+    margin-bottom: 1rem;
+}
