@@ -10,7 +10,7 @@ export default function Task(props) {
         <div className={styles.top}>
           <h2 className={styles.title}>{props.name}</h2>
           <div className={styles.priority}>
-            {props.description != "" ? <i class="fa-solid fa-circle-info"></i> : "" }
+            {props.description != "" ? <i className="fa-solid fa-circle-info"></i> : "" }
             <small>
               <p>
                 <i className="fa-solid fa-triangle-exclamation"></i> { props.priority}
