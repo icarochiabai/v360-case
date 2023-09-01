@@ -6,21 +6,36 @@
 }
 
 .taskMenu button {
-    background-color: #ededed;
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    border: 1px solid #b0b0b0;
-    font-weight: bold;
+    border: none;
+    text-shadow: 1px 1px 2px gray;
     font-size: larger;
     transition: background-color 0.4s ease-out;
-}
-
-.taskMenu button:hover {
-    background-color: #cfcfcf;
+    color:white;
     cursor: pointer;
 }
 
+.button1 {
+    background-color: var(--menuButton1);
+}
+.button2 {
+    background-color: var(--menuButton2);
+}
+.button3 {
+    background-color: var(--menuButton3);
+}
+
+.button1:hover {
+    background-color: var(--menuButton1-hover);
+}
+.button2:hover {
+    background-color: var(--menuButton2-hover);
+}
+.button3:hover {
+    background-color: var(--menuButton3-hover);
+}
 
 .listMenu {
     height: 100%;
