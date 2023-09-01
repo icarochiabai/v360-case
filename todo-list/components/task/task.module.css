@@ -104,3 +104,15 @@
     color: var(--task-title-light);
     font-weight: bold;
 }
+
+.priority {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.priority p{
+    all: unset;
+    color: var(--task-desc-dark)
+}
