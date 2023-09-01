@@ -7,7 +7,7 @@
     padding: 2rem;
     padding-top: 1rem;
     border-radius: 1rem;
-    border: 4px dashed var(--form-border);
+    /* border: 4px dashed var(--form-border); */
 
     position: fixed;
     left: 50%;
@@ -18,6 +18,45 @@
     backdrop-filter: blur(1rem);
 
     transition: opacity 0.2s ease-in-out;
+    overflow: hidden;
+	
+}
+
+@keyframes rotate {
+	100% {
+		transform: rotate(1turn);
+	}
+}
+
+.form::before {
+    content: '';
+    position: absolute;
+    z-index: -2;
+    left: -150%;
+    top: -150%;
+    width: 400%;
+    height: 400%;
+    background-repeat: no-repeat;
+    background-size: 50% 50%, 50% 50%;
+    background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+    background-image: 
+        linear-gradient(#ff6900, #ff6900),
+        linear-gradient(var(--background), var(--background)),
+        linear-gradient(#ff6900, #ff6900),
+        linear-gradient(var(--background), var(--background));
+    animation: rotate 4s linear infinite;
+}
+	
+.form::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: 2px;
+    top: 2px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    background: var(--background);
+    border-radius: 1rem;
 }
 
 .form h1 {

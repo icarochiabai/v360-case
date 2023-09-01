@@ -11,6 +11,9 @@
     transition: background-color 0.4s ease-out;
     font-size: 0.75rem;
     overflow-y: hidden;
+    min-height: 2.5rem;
+    max-height: 2.5rem;
+    transition: max-height 0.2s linear;
 }
 
 .box h2 {
@@ -19,32 +22,58 @@
     font-weight: 500;
 }
 
+.box i {
+    color: var(--task-desc-dark);
+    transition: color 0.4s ease-out;
+}
+
 .box p {
     color: var(--task-desc-dark);
     transition: color 0.4s ease-out;
+    transform-origin: top;
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1, 0);
 }
 
 .box:hover {
     background-color: var(--task-backgroundActive);
     cursor: pointer;
+    transition: max-height 0.2s linear;
+    max-height: 4rem;
 }
 
-.box:hover h2 {
+.box:hover h2,
+.box:hover i {
     color:var(--task-title-light)
 }
 
 .box:hover p {
     color:var(--task-desc-light);
+    transform-origin: bottom;
+    transition: transform 0.3s ease-in-out;
+    transform: scale(1, 1);
 }
 
 .box[data-active="true"] {
     background-color: var(--task-backgroundActive);
+    max-height: 4rem;
 }
 
+.box[data-active="true"] h2, 
+.box[data-active="true"] i {
+    color: var(--task-title-light);
+}
 .box[data-active="true"] h2 {
     color: var(--task-title-light);
 }
 
 .box[data-active="true"] p {
     color: var(--task-desc-light);
+    transform: scale(1, 1);
+}
+
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
