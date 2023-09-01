@@ -17,3 +17,21 @@
     height: 100%;
     width: 20%;
 }
+
+.header {
+    margin-top: 4rem;
+    display: flex;
+    gap:1rem;
+    align-items: baseline;
+}
+
+.header h1 {
+    color: var(--text-highlight);
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+.header h2 {
+    color: var(--text);
+    font-weight: 200;
+}

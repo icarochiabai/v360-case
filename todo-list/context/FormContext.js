@@ -7,17 +7,26 @@ export function FormProvider({ children }) {
     const [ title, setTitle ] = useState('');
     const [description, setDescription ] = useState('');
     const [priority, setPriority ] = useState(0);
+    const [ mode, setMode ] = useState('');
 
     return (
         <FormContext.Provider value={{
         useIsVisible:{isVisible, setIsVisible},
         useTitle:{title, setTitle},
         useDescription:{description, setDescription},
-        usePriority:{priority, setPriority}
+        usePriority:{priority, setPriority},
+        useMode:{mode, setMode}
         }}>
             { children }
         </FormContext.Provider>
     );
+}
+
+export function useMode() {
+    const context = useContext(FormContext)["useMode"];
+    if(context) {
+        return context;
+    }
 }
 
 export function useIsVisible() {

@@ -1,7 +1,8 @@
-import { SelectedTask, TasksContext, TasksDispatchContext, TasksProvider, useIdCounter, useIsEditing, useSelectedTask } from '@/app/context/TasksContext'
+import { SelectedTask, TasksContext, TasksDispatchContext, TasksProvider, useIdCounter, useIsEditing, useSelectedTask } from '@/context/TasksContext'
 import styles from './menu.module.css'
 import { useContext } from 'react'
-import { FormContext, useDescription, useIsVisible, usePriority, useTitle } from '../form/FormContext';
+import { FormContext, useDescription, useIsVisible, useMode, usePriority, useTitle } from '../../context/FormContext';
+import Head from 'next/head';
 
 export default function Menu(props) {
     if(props.menuType === "task") {
@@ -13,6 +14,7 @@ export default function Menu(props) {
         const { title, setTitle } = useTitle();
         const { description, setDescription } = useDescription();
         const { priority, setPriority } = usePriority();
+        const { mode, setMode } = useMode();
 
         return (
                 <div className={styles.taskMenu}>
@@ -22,24 +24,38 @@ export default function Menu(props) {
                         setPriority(0);
                         setSelectedTask(null);
                         setIsVisible(!isVisible);
+                        setMode('adding');
                     }
-                    }>+</button>
+                    }
+                    className={styles.button1}
+                    >
+                        <i className="fa-solid fa-plus"></i>
+                    </button>
                     <button onClick={ () => {
                         if(selectedTask != null) {
                             setTitle(tasks[selectedTask].name);
                             setDescription(tasks[selectedTask].description);
                             setPriority(tasks[selectedTask].priority);
                             setIsVisible(!isVisible);
+                            setMode('editing');
                         }
-                    }}>%</button>
+                    }}
+                    className={styles.button2}
+                    >
+                        <i className="fa-solid fa-pencil"></i>
+                    </button>
                     <button onClick={ () => {
                         dispatch({
                         type:'deleted',
                         id: selectedTask,
                         });
+                        setSelectedTask(null);
                     }
-                    }>-</button>
-                    <button>x</button>
+                    }
+                    className={styles.button3}
+                    >
+                    <i className="fa-solid fa-trash-can"></i>
+                    </button>
                 </div>
         )
     } else if (props.menuType === "list") {
