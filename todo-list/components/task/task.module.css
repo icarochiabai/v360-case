@@ -1,5 +1,6 @@
 .box {
     display: flex;
+    width: 100%;
     flex-direction: column;
 
     padding: 0.5rem;
@@ -76,4 +77,30 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    flex-direction: row-reverse;
+}
+
+.wrapper input {
+    transform: translateY(15%);
+    width: 2rem;
+    height: 2rem;
+}
+
+.wrapper input:checked ~ .box h2 {
+    text-decoration: line-through;
+    color: var(--task-desc-light);
+    font-weight: bold;
+}
+
+.wrapper input:checked ~ .box:hover h2,
+.wrapper input:checked ~ .box[data-active="true"] h2 {
+    text-decoration: line-through;
+    color: var(--task-title-light);
+    font-weight: bold;
 }
