@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import styles from './form.module.css'
 import { FormContext, useDescription, useIsVisible, useMode, usePriority, useTitle } from '../../context/FormContext';
-import { TasksContext, TasksDispatchContext, useIdCounter, useSelectedTask } from '@/context/TasksContext';
+import { TasksContext, TasksDispatchContext, useIdCounter, useSelectedTask, useTasks } from '@/context/TasksContext';
 import Task from '../task/task';
 
 export default function Form(props) {
@@ -48,10 +48,11 @@ export default function Form(props) {
                     description: description,
                     priority: priority,
                     isChecked: false,
-                    isEditing: false,
                 });
-
             }
+            dispatch({
+                type:'sorted'
+            });
             resetForm();
         } else {
             alert("Digita algo, pf.");
