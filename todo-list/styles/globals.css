@@ -1,0 +1,61 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background-color: var(--background);
+
+  background-image: radial-gradient(
+    circle at 100%,
+    var(--background),
+    var(--background2) 
+  );
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+:root {
+  --background: #201e1f;
+  --background2: #231f1b;
+
+  --text: #eaeaea;
+  --text-highlight: #ff6900;
+
+
+  --task-background: #f0f0f0;
+  --task-backgroundActive: #689857;
+  --task-title-dark: black;
+  --task-desc-dark: gray;
+  --task-title-light: white;
+  --task-desc-light: gainsboro;
+
+  --menuButton1: #689857;
+  --menuButton2: #dc8904;
+  --menuButton3: #CF5C36;
+
+  --menuButton1-hover: #59824A;
+  --menuButton2-hover: #b47004;
+  --menuButton3-hover: #B54E2C;
+
+  --form-background: rgba(32, 30, 31, 0.8);
+  --form-border: #ff6900;
+  --form-title: #f0f0f0;
+  --form-button: #f08800;
+  --form-button-hover: #f06600;
+  --form-input-background: #eaeaea;
+
+}
