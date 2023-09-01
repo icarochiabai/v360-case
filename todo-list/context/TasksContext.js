@@ -3,7 +3,7 @@ export const TasksContext = createContext(null);
 export const TasksDispatchContext = createContext(null);
 
 export function TasksProvider({ children }) {
-    const [tasks, dispatch] = useReducer(
+    const [ tasks, dispatch] = useReducer(
         tasksReducer,
         initialTasks
     );
@@ -11,9 +11,10 @@ export function TasksProvider({ children }) {
     const [idCounter, setIdCounter] = useState(tasks.length);
     const [isEditing, setIsEditing] = useState(false);
 
+
     return (
         <TasksContext.Provider value={{
-            tasks, 
+            tasks,
             useSelectedTask: {selectedTask, setSelectedTask},
             useIdCounter: { idCounter, setIdCounter},
             useIsEditing: { isEditing, setIsEditing},
@@ -55,14 +56,12 @@ function tasksReducer(tasks, action) {
         description: action.description,
         priority: action.priority,
         isChecked: 0,
-        isEditing: action.isEditing,
       }];
     }
     case 'changed': {
         action.tasks[action.selectedTask].name = action.name;
         action.tasks[action.selectedTask].description = action.description;
         action.tasks[action.selectedTask].priority = action.priority;
-        console.log(action.tasks[action.selectedTask]);
     }
     case 'deleted': {
         if(action.id != null){
@@ -71,10 +70,16 @@ function tasksReducer(tasks, action) {
             return tasks
         }
     }
+    case 'sorted': {
+        tasks.sort( (a, b) => {
+            return b.priority - a.priority;
+        }) 
+        return tasks;
+    }
   }
 }
 
 const initialTasks = [
-  { id:0, name: 'teste', description: 'quick description.', priority: 0, isChecked: false, isEditing: false },
-  { id:1, name: 'teste2', description: 'quick description.', priority: 0, isChecked: false, isEditing: false }
+  { id:0, name: 'teste', description: 'quick description.', priority: 0, isChecked: false },
+  { id:1, name: 'teste2', description: 'quick description.', priority: 0, isChecked: false }
 ]
