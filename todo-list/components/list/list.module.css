@@ -2,8 +2,12 @@
     display: flex;
     flex-direction: column;
 
-    width: fit-content;
-    padding: 1rem;
+    padding: 2rem;
+    width: 40%;
 
-    border: 2px dotted gray;
+}
+
+.listName {
+    color:var(--text-highlight);
+    margin-bottom: 1rem;
 }
