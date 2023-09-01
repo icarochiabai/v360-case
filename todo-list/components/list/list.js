@@ -2,15 +2,18 @@
 import styles from './list.module.css'
 import Task from '../task/task'
 import { useContext, useState } from 'react'
-import { TasksContext, useSelectedTask } from '@/app/context/TasksContext'
+import { TasksContext, useSelectedTask } from '@/context/TasksContext'
+import { useIsVisible } from '../../context/FormContext'
 
 export default function List(props) {
   const context = useContext(TasksContext);
   const tasks = context['tasks'];
   const { selectedTask, setSelectedTask } = useSelectedTask();
+  const { isVisible, setIsVisible } = useIsVisible();
 
   const handleTaskSelect = (taskId) => { 
-    if(selectedTask) {
+    setIsVisible(false);
+    if(selectedTask != null) {
       if(tasks[selectedTask].id === taskId) {
         setSelectedTask(null);
       } else {
@@ -31,9 +34,9 @@ export default function List(props) {
 
   return (
     <div className={styles.box}>
-        <div>
+        <div className={styles.listName}>
             <h2>List 1</h2>
-            <p>Quick description.</p>
+            {/* <p>Quick description.</p> */}
         </div>
         <div>
         {tasks.map(
