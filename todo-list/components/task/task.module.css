@@ -105,6 +105,34 @@
     font-weight: bold;
 }
 
+.wrapper input:checked ~ .box:hover {
+    background-color: var(--task-background);
+}
+
+.wrapper input:checked ~ .box:hover h2 {
+    color: var(--task-desc-light);
+}
+
+.wrapper input:checked ~ .box:hover p,
+.wrapper input:checked ~ .box:hover i {
+    color: var(--task-desc-dark);
+}
+
+.wrapper input:checked ~ .box[data-active="true"] {
+    background-color: var(--task-background);
+    max-height: 4rem;
+}
+
+.wrapper input:checked ~ .box[data-active="true"] h2{ 
+    color: var(--task-desc-light);
+}
+
+.wrapper input:checked ~ .box[data-active="true"] i,
+.wrapper input:checked ~ .box[data-active="true"] p {
+    color: var(--task-desc-dark);
+}
+
+
 .priority {
     display: flex;
     flex-direction: column;
