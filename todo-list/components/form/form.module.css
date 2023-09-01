@@ -1,19 +1,32 @@
 .form {
     display: flex;
     flex-direction: column;
-    width: fit-content;
-    border: 1px solid black;
-    padding: 2rem;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    gap: 1rem;
+    width: 40%;
 
-    background-color: #e0e0e0;
+    padding: 2rem;
+    padding-top: 1rem;
+    border-radius: 1rem;
+    border: 4px dashed var(--form-border);
+
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background-color: var(--form-background);
+    backdrop-filter: blur(1rem);
+
+    transition: opacity 0.2s ease-in-out;
+}
+
+.form h1 {
+    color: var(--form-title);
 }
 
 .form[data-active="false"] {
-    display: none;
+    opacity: 0;
+    visibility: hidden;
 }
 
 .form label {
@@ -23,6 +36,56 @@
 
 .form input {
     border: none;
-    border-bottom: 1px solid gray;
-    margin-bottom: 1rem;
+    height: 2.5rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    background-color: var(--form-input-background);
+}
+
+.form input[type=number]::-webkit-inner-spin-button,
+.form input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin:0;
+}
+
+
+.form input::placeholder {
+    color:gray;
+    font-size: larger;
+}
+
+.row1 input {
+    width: 100%;
+}
+
+.row2 {
+    display: grid;
+    grid-template-columns: 4fr 1fr 0.35fr;
+    gap: 1rem;
+}
+
+.row2 input {
+    width: 100%;
+}
+
+.row2 button {
+    aspect-ratio: 1/1;
+    width: fit-content;
+    cursor: pointer;
+    background-color: var(--form-button);
+    border: none;
+    color: white;
+
+    font-size: larger;
+
+    border-radius: 50%;
+    transition: background-color 0.4s ease-out;
+}
+
+.row2 button:hover {
+    transition: background-color 0.4s ease-out;
+    background-color: var(--form-button-hover);
 }
