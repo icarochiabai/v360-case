@@ -94,13 +94,14 @@
 
 .wrapper input:checked ~ .box h2 {
     text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--task-desc-dark);
     color: var(--task-desc-light);
     font-weight: bold;
 }
 
 .wrapper input:checked ~ .box:hover h2,
 .wrapper input:checked ~ .box[data-active="true"] h2 {
-    text-decoration: line-through;
     color: var(--task-title-light);
     font-weight: bold;
 }

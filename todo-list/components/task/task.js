@@ -13,7 +13,7 @@ export default function Task(props) {
             {props.description != "" ? <i class="fa-solid fa-circle-info"></i> : "" }
             <small>
               <p>
-                <i class="fa-solid fa-triangle-exclamation"></i> { props.priority}
+                <i className="fa-solid fa-triangle-exclamation"></i> { props.priority}
               </p>
             </small>
           </div>
