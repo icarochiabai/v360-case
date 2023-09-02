@@ -2,31 +2,31 @@
 import styles from './list.module.css'
 import Task from '../task/task'
 import { useContext, useState } from 'react'
-import { TasksContext, useSelectedTask } from '@/context/TasksContext'
+import { TasksContext, useSelectedTaskIndex } from '@/context/TasksContext'
 import { useIsVisible } from '../../context/FormContext'
 
 export default function List(props) {
   const context = useContext(TasksContext);
   const tasks = context['tasks'];
-  const { selectedTask, setSelectedTask } = useSelectedTask();
+  const { selectedTaskIndex, setSelectedTaskIndex } = useSelectedTaskIndex();
   const { isVisible, setIsVisible } = useIsVisible();
 
   const handleTaskSelect = (taskId) => { 
     setIsVisible(false);
-    if(selectedTask != null) {
-      if(tasks[selectedTask].id === taskId) {
-        setSelectedTask(null);
+    if(selectedTaskIndex != null) {
+      if(tasks[selectedTaskIndex].id === taskId) {
+        setSelectedTaskIndex(null);
       } else {
         for(let i = 0; i < tasks.length; i++){
           if(tasks[i].id === taskId) {
-            setSelectedTask(i);
+            setSelectedTaskIndex(i);
           }
         }
       }
     } else {
       for(let i = 0; i < tasks.length; i++){
         if(tasks[i].id === taskId) {
-          setSelectedTask(i);
+          setSelectedTaskIndex(i);
         }
       }
     }
@@ -46,10 +46,8 @@ export default function List(props) {
                     name={task.name}
                     description={task.description}
                     priority={task.priority}
-                    isChecked={task.isChecked}
-                    isSelected={selectedTask != null ? tasks[selectedTask].id === task.id : false}
+                    isSelected={selectedTaskIndex != null ? tasks[selectedTaskIndex].id === task.id : false}
                     onSelect={ () => handleTaskSelect(task.id) }
-                    isEditing ={task.isEditing}
                 />
             )
         )}
