@@ -70,10 +70,9 @@ export default function Menu(props) {
                     <h2>Lista 5</h2>
                 </div>
                 <div className={styles.listButtons}>
-                    <button>+</button>
-                    <button>%</button>
-                    <button>-</button>
-                    <button>x</button>
+                    <h2>Add list</h2>
+                    <h2>Rename list</h2>
+                    <h2>Delete list</h2>
                 </div>
             </div>
         )
