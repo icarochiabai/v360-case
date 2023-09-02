@@ -58,4 +58,18 @@ a {
   --form-button-hover: #f06600;
   --form-input-background: #eaeaea;
 
+  --listMenu-background: #f0f0f0;
+  --listMenu-backgroundActive:#d0d0d0;
+  --listMenu-backgroundOption:#f0f0f0;
+  --listMenu-title: black;
+  --listMenu-options: black;
+  --listMenu-buttons: black;
+
+  /* --listMenu-background: #171412;
+  --listMenu-backgroundActive:#222222;
+  --listMenu-backgroundOption:#171412;
+  --listMenu-title: #ff6900;
+  --listMenu-options: gainsboro;
+  --listMenu-buttons: #ff6900; */
+
 }
