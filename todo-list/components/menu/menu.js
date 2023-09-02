@@ -1,4 +1,4 @@
-import { SelectedTask, TasksContext, TasksDispatchContext, TasksProvider, useIdCounter, useIsEditing, useSelectedTask } from '@/context/TasksContext'
+import { SelectedTask, TasksContext, TasksDispatchContext, TasksProvider, useIdCounter, useIsEditing, useSelectedTaskIndex } from '@/context/TasksContext'
 import styles from './menu.module.css'
 import { useContext } from 'react'
 import { FormContext, useDescription, useIsVisible, useMode, usePriority, useTitle } from '../../context/FormContext';
@@ -8,8 +8,7 @@ export default function Menu(props) {
     if(props.menuType === "task") {
         const dispatch = useContext(TasksDispatchContext);
         const { isVisible, setIsVisible } = useIsVisible();
-        const { selectedTask, setSelectedTask } = useSelectedTask();
-        const { isEditing, setIsEditing } = useIsEditing();
+        const { selectedTaskIndex, setSelectedTaskIndex } = useSelectedTaskIndex();
         const tasks = useContext(TasksContext)["tasks"];
         const { title, setTitle } = useTitle();
         const { description, setDescription } = useDescription();
@@ -22,7 +21,7 @@ export default function Menu(props) {
                         setTitle('');
                         setDescription('');
                         setPriority(0);
-                        setSelectedTask(null);
+                        setSelectedTaskIndex(null);
                         setIsVisible(!isVisible);
                         setMode('adding');
                     }
@@ -32,10 +31,10 @@ export default function Menu(props) {
                         <i className="fa-solid fa-plus"></i>
                     </button>
                     <button onClick={ () => {
-                        if(selectedTask != null) {
-                            setTitle(tasks[selectedTask].name);
-                            setDescription(tasks[selectedTask].description);
-                            setPriority(tasks[selectedTask].priority);
+                        if(selectedTaskIndex != null) {
+                            setTitle(tasks[selectedTaskIndex].name);
+                            setDescription(tasks[selectedTaskIndex].description);
+                            setPriority(tasks[selectedTaskIndex].priority);
                             setIsVisible(!isVisible);
                             setMode('editing');
                         }
@@ -47,9 +46,9 @@ export default function Menu(props) {
                     <button onClick={ () => {
                         dispatch({
                         type:'deleted',
-                        id: selectedTask,
+                        id: selectedTaskIndex,
                         });
-                        setSelectedTask(null);
+                        setSelectedTaskIndex(null);
                     }
                     }
                     className={styles.button3}

@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import styles from './form.module.css'
 import { FormContext, useDescription, useIsVisible, useMode, usePriority, useTitle } from '../../context/FormContext';
-import { TasksContext, TasksDispatchContext, useIdCounter, useSelectedTask, useTasks } from '@/context/TasksContext';
+import { TasksContext, TasksDispatchContext, useIdCounter, useSelectedTaskIndex, useTasks } from '@/context/TasksContext';
 import Task from '../task/task';
 
 export default function Form(props) {
@@ -12,7 +12,7 @@ export default function Form(props) {
     const { title, setTitle } = useTitle();
     const { description, setDescription } = useDescription();
     const { priority, setPriority } = usePriority();
-    const { selectedTask, setSelectedTask } = useSelectedTask();
+    const { selectedTaskIndex, setSelectedTaskIndex } = useSelectedTaskIndex();
     const { mode, setMode } = useMode();
     const tasks = useContext(TasksContext)["tasks"];
 
@@ -22,18 +22,18 @@ export default function Form(props) {
         setTitle('');
         setDescription('');
         setPriority(0);
-        setSelectedTask(null);
+        setSelectedTaskIndex(null);
         setMode('');
     }
 
     const handleAddTask = () => {
         if (title) {
-            if(selectedTask != null) {
+            if(selectedTaskIndex != null) {
                 setIsVisible(false);
                 dispatch({
                     type:'changed',
                     tasks,
-                    selectedTask,
+                    selectedTaskIndex,
                     name: title,
                     description: description,
                     priority: priority

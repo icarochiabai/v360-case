@@ -7,7 +7,7 @@ export function TasksProvider({ children }) {
         tasksReducer,
         initialTasks
     );
-    const [selectedTask, setSelectedTask] = useState(null);
+    const [selectedTaskIndex, setSelectedTaskIndex] = useState(null);
     const [idCounter, setIdCounter] = useState(tasks.length);
     const [isEditing, setIsEditing] = useState(false);
 
@@ -15,7 +15,7 @@ export function TasksProvider({ children }) {
     return (
         <TasksContext.Provider value={{
             tasks,
-            useSelectedTask: {selectedTask, setSelectedTask},
+            useSelectedTaskIndex: {selectedTaskIndex, setSelectedTaskIndex},
             useIdCounter: { idCounter, setIdCounter},
             useIsEditing: { isEditing, setIsEditing},
             }}>
@@ -26,8 +26,8 @@ export function TasksProvider({ children }) {
     );
 }
 
-export function useSelectedTask() {
-    const context = useContext(TasksContext)["useSelectedTask"];
+export function useSelectedTaskIndex() {
+    const context = useContext(TasksContext)["useSelectedTaskIndex"];
     if(context) {
         return context;
     }
@@ -59,9 +59,9 @@ function tasksReducer(tasks, action) {
       }];
     }
     case 'changed': {
-        action.tasks[action.selectedTask].name = action.name;
-        action.tasks[action.selectedTask].description = action.description;
-        action.tasks[action.selectedTask].priority = action.priority;
+        action.tasks[action.selectedTaskIndex].name = action.name;
+        action.tasks[action.selectedTaskIndex].description = action.description;
+        action.tasks[action.selectedTaskIndex].priority = action.priority;
     }
     case 'deleted': {
         if(action.id != null){
