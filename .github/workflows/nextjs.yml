@@ -51,6 +51,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
+          run: cd todo-list
           node-version: "16"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
       - name: Setup Pages
