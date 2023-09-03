@@ -73,6 +73,10 @@
     cursor: pointer;
 }
 
+.lists h2[data-selected="true"] {
+    background-color: var(--listMenu-backgroundActive);
+}
+
 .listButtons {
     display: flex;
     flex-direction: column;
@@ -92,4 +96,5 @@
     cursor: pointer;
     background-color: var(--listMenu-backgroundActive);
 }
+
 
