@@ -1,8 +1,9 @@
 import { SelectedTask, TasksContext, TasksDispatchContext, TasksProvider, useIdCounter, useIsEditing, useSelectedTaskIndex } from '@/context/TasksContext'
 import styles from './menu.module.css'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { FormContext, useDescription, useIsVisible, useMode, usePriority, useTitle } from '../../context/FormContext';
 import Head from 'next/head';
+import { ListDispatchContext, useCurrentListIndex, useLists } from '@/context/ListsContext';
 
 export default function Menu(props) {
     if(props.menuType === "task") {
@@ -14,6 +15,8 @@ export default function Menu(props) {
         const { description, setDescription } = useDescription();
         const { priority, setPriority } = usePriority();
         const { mode, setMode } = useMode();
+        const { lists, setLists } = useLists();
+        const { currentListIndex, setCurrentListIndex } = useCurrentListIndex();
 
         return (
                 <div className={styles.taskMenu}>
@@ -46,6 +49,8 @@ export default function Menu(props) {
                     <button onClick={ () => {
                         dispatch({
                         type:'deleted',
+                        lists,
+                        currentListIndex,
                         id: selectedTaskIndex,
                         });
                         setSelectedTaskIndex(null);
@@ -58,20 +63,114 @@ export default function Menu(props) {
                 </div>
         )
     } else if (props.menuType === "list") {
+        const { lists, setLists } = useLists();
+        const { currentListIndex, setCurrentListIndex } = useCurrentListIndex();
+        const { selectedTaskIndex, setSelectedTaskIndex } = useSelectedTaskIndex();
+        const dispatch = useContext(TasksDispatchContext);
+        const listDispatch = useContext(ListDispatchContext);
+        const { idCounter, setIdCounter } = useIdCounter();
+        const { isEditing, setIsEditing } = useIsEditing();
+        const [ name, setName ] = useState("");
+
+        const handleListSelect = (listId) => {
+            setSelectedTaskIndex(null);
+            setIsEditing(false, null);
+            for(let i = 0; i < lists.length; i++){
+                if(lists[i].id == listId) {
+                    setCurrentListIndex(i);
+                    dispatch({
+                        type: 'listChanged',
+                        lists,
+                        i
+                    })
+                }
+            }
+        };
+
+        const handleListEdit = (index) => {
+            setIsEditing([!isEditing[0], index]);
+            setName(lists[index].name);
+        };
+        
+        const handleEnter = (e, index) => {
+            if(e.keyCode == 13) {
+                lists[index].name = name;
+                setIsEditing([!isEditing[0], index]);
+            }
+        };
+
         return (
             <div className={styles.listMenu}>
                 <div className={styles.lists}>
                     <h1>Listas</h1>
-                    <h2>Lista 1</h2>
-                    <h2>Lista 2</h2>
-                    <h2>Lista 3</h2>
-                    <h2>Lista 4</h2>
-                    <h2>Lista 5</h2>
+                    {lists.map(
+                        (list) => (
+                            isEditing[0] && lists[isEditing[1]].id == list.id ?
+                            <input
+                                type='text'
+                                key={list.id}
+                                value={ isEditing[0] ? name : list.name}
+                                onChange={(e) => setName(e.target.value)}
+                                onKeyUp={(e) => handleEnter(e, currentListIndex)}
+                            /> 
+                            :
+                            <h2
+                                key={list.id} 
+                                onClick={ () => handleListSelect(list.id) }
+                                data-selected={ lists[currentListIndex].id == list.id }
+                            >
+                                {list.name}
+                            </h2>
+                        )
+                    )}
                 </div>
                 <div className={styles.listButtons}>
-                    <h2>Add list</h2>
-                    <h2>Rename list</h2>
-                    <h2>Delete list</h2>
+                    <h2
+                        onClick={ () => {
+                            setIdCounter(idCounter + 1);
+                            setIsEditing([false, null]);
+                            listDispatch({
+                                type: 'added',
+                                id: idCounter,
+                            });
+                        } }
+                    >
+                        Add list
+                    </h2>
+
+                    <h2
+                        onClick={ () => handleListEdit(currentListIndex) } 
+                    >
+                        Rename list
+                    </h2>
+
+                    <h2
+                        onClick={ () => {
+                            if(lists.length > 1){
+                                setIsEditing([false, null]);
+                                listDispatch({
+                                    type: 'deleted',
+                                    id: currentListIndex,
+                                });
+                                if(currentListIndex == lists.length - 1){
+                                    setCurrentListIndex(currentListIndex - 1);
+                                    dispatch({
+                                        type: 'listChanged',
+                                        lists,
+                                        i: currentListIndex - 1
+                                    })
+                                } else {
+                                    dispatch({
+                                        type: 'listChanged',
+                                        lists,
+                                        i: currentListIndex + 1
+                                    })
+                                }
+                            }
+                        } }
+                    >
+                        Delete list
+                    </h2>
                 </div>
             </div>
         )
