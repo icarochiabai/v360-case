@@ -3,15 +3,22 @@ import styles from './task.module.css'
 import { TasksContext, TasksDispatchContext, useIsEditing, useSelectedTaskIndex } from '@/context/TasksContext';
 import { useCurrentListIndex, useLists } from '@/context/ListsContext';
 
+import useSound from 'use-sound';
+import checkSound from '/public/sound/check.mp3';
+
 export default function Task(props) {
   const { selectedTaskIndex, setSelectedTaskIndex } = useSelectedTaskIndex();
   const { lists, setLists } = useLists();
   const { currentListIndex, setCurrentListIndex } = useCurrentListIndex();
   const dispatch = useContext(TasksDispatchContext);
+  const [check] = useSound(checkSound);
 
   const handleCheck = (taskId) => {
     for(let i = 0; i < lists[currentListIndex].tasks.length; i++){
       if(lists[currentListIndex].tasks[i].id == taskId) {
+        if(!lists[currentListIndex].tasks[i].isChecked) {
+          check();
+        }
         dispatch({
           type: 'checked',
           lists,

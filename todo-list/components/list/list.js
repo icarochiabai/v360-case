@@ -6,6 +6,9 @@ import { TasksContext, useSelectedTaskIndex } from '@/context/TasksContext'
 import { useIsVisible } from '../../context/FormContext'
 import { useCurrentListIndex, useLists } from '@/context/ListsContext'
 
+import useSound from 'use-sound'
+import taskSelectSound from '/public/sound/taskSelect.mp3'
+
 export default function List(props) {
   const context = useContext(TasksContext);
   const tasks = context['tasks'];
@@ -13,9 +16,11 @@ export default function List(props) {
   const { isVisible, setIsVisible } = useIsVisible();
   const { lists, setLists } = useLists();
   const { currentListIndex, setCurrentListIndex } = useCurrentListIndex();
+  const [ select ] = useSound(taskSelectSound);
 
   const handleTaskSelect = (taskId) => { 
     setIsVisible(false);
+    select();
     if(selectedTaskIndex != null) {
       if(tasks[selectedTaskIndex].id === taskId) {
         setSelectedTaskIndex(null);

@@ -110,9 +110,16 @@
 .lists h2:hover,
 .lists h2[data-selected="true"] {
     cursor: pointer;
-    background-color: var(--listMenu-backgroundActive) !important;
     color: var(--listMenu-background1);
     font-weight: bolder;
+}
+
+.lists h2:hover {
+    background-color: var(--listMenu-backgroundHover);
+}
+
+.lists h2[data-selected="true"] {
+    background-color: var(--listMenu-backgroundActive);
 }
 
 .lists input {
@@ -124,12 +131,15 @@
     border: none;
     
     font-size: medium;
-    font-weight: 300;
+    font-weight: 500;
     vertical-align: bottom;
-    background-color: #fff;
+    background-color: var(--listMenu-backgroundActive);
+    color: var(--listMenu-background1);
+}
 
-    border: 1px solid var(--listMenu-backgroundActive);
-    
+.lists input::placeholder {
+    font-weight: 500;
+    color: gainsboro;
 }
 
 .listButtons {
