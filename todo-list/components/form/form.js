@@ -62,7 +62,6 @@ export default function Form(props) {
             });
             resetForm();
         } else {
-            alert("Digita algo, pf.");
         }
     };
         

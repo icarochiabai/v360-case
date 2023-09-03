@@ -4,6 +4,8 @@ import { useContext, useRef, useState } from 'react'
 import { FormContext, useDescription, useIsVisible, useMode, usePriority, useTitle } from '../../context/FormContext';
 import Head from 'next/head';
 import { ListDispatchContext, useCurrentListIndex, useLists } from '@/context/ListsContext';
+import useSound from 'use-sound';
+import listSelectSound from '/public/sound/taskSelect.mp3';
 
 export default function Menu(props) {
     if(props.menuType === "task") {
@@ -72,10 +74,12 @@ export default function Menu(props) {
         const { isEditing, setIsEditing } = useIsEditing();
         const [ name, setName ] = useState("");
         let textInput;
+        const [ listSelect ] = useSound(listSelectSound);
 
         const handleListSelect = (listId) => {
             setSelectedTaskIndex(null);
             setIsEditing(false, null);
+            listSelect();
             for(let i = 0; i < lists.length; i++){
                 if(lists[i].id == listId) {
                     setCurrentListIndex(i);
