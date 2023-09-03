@@ -1,14 +1,18 @@
 import { createContext, useCallback, useContext, useEffect, useReducer, useState } from "react";
+import { useCurrentListIndex, useLists } from "./ListsContext";
 export const TasksContext = createContext(null);
 export const TasksDispatchContext = createContext(null);
 
 export function TasksProvider({ children }) {
+    const { lists, setLists } = useLists();
+    const { currentListIndex, setCurrentListIndex } = useCurrentListIndex();
+    const initialTasks = lists[currentListIndex].tasks;
     const [ tasks, dispatch] = useReducer(
         tasksReducer,
         initialTasks
     );
     const [selectedTaskIndex, setSelectedTaskIndex] = useState(null);
-    const [idCounter, setIdCounter] = useState(tasks.length);
+    const [idCounter, setIdCounter] = useState(0);
     const [isEditing, setIsEditing] = useState(false);
 
 
@@ -50,24 +54,28 @@ export function useIsEditing() {
 function tasksReducer(tasks, action) {
     switch (action.type) {
     case 'added': {
-      return [...tasks, {
-        id: action.id,
-        name: action.name,
-        description: action.description,
-        priority: action.priority,
-        isChecked: 0,
-      }];
+        action.lists[action.currentListIndex].tasks = [...(action.lists[action.currentListIndex].tasks), 
+            {
+                id: action.id,
+                name: action.name,
+                description: action.description,
+                priority: action.priority,
+            }];
+      return action.lists[action.currentListIndex].tasks;
     }
     case 'changed': {
-        action.tasks[action.selectedTaskIndex].name = action.name;
-        action.tasks[action.selectedTaskIndex].description = action.description;
-        action.tasks[action.selectedTaskIndex].priority = action.priority;
+        action.lists[action.currentListIndex].tasks[action.selectedTaskIndex].name = action.name;
+        action.lists[action.currentListIndex].tasks[action.selectedTaskIndex].description = action.description;
+        action.lists[action.currentListIndex].tasks[action.selectedTaskIndex].priority = action.priority;
     }
     case 'deleted': {
         if(action.id != null){
-            return tasks.filter(t => t.id !== tasks[action.id].id);
+            action.lists[action.currentListIndex].tasks = action.lists[action.currentListIndex].tasks.filter(
+                t => t.id != action.lists[action.currentListIndex].tasks[action.id].id
+            );
+            return action.lists[action.currentListIndex].tasks;
         } else {
-            return tasks
+            return action.lists[action.currentListIndex].tasks;
         }
     }
     case 'sorted': {
@@ -76,10 +84,12 @@ function tasksReducer(tasks, action) {
         }) 
         return tasks;
     }
+    case 'listChanged': {
+        return action.lists[action.i].tasks;
+    }
+    case 'checked': {
+        action.lists[action.currentListIndex].tasks[action.i].isChecked = !action.lists[action.currentListIndex].tasks[action.i].isChecked;
+        return action.lists[action.currentListIndex].tasks;
+    }
   }
 }
-
-const initialTasks = [
-  { id:0, name: 'teste', description: 'quick description.', priority: 0, isChecked: false },
-  { id:1, name: 'teste2', description: 'quick description.', priority: 0, isChecked: false }
-]
