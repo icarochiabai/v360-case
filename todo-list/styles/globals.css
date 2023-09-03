@@ -29,23 +29,24 @@ a {
 
 
 :root {
-  --background: #201e1f;
+  --background: #223836;
   --background2: #231f1b;
 
-  --text: #eaeaea;
-  --text-highlight: #ff6900;
+  --text: #f0f0f0;
+  --text-highlight: #d7642b;
 
 
   --task-background: #f0f0f0;
   --task-backgroundActive: #689857;
-  --task-title-dark: black;
+  --task-backgroundActive-checked: #708868;
+  --task-title-dark: var(--background);
   --task-desc-dark: gray;
   --task-title-light: white;
   --task-desc-light: gainsboro;
 
-  --menuButton1: #689857;
-  --menuButton2: #f5bb00;
-  --menuButton3: #CF5C36;
+  --menuButton1: #00ca4e;
+  --menuButton2: #ffbd44;
+  --menuButton3: #ff605c;
 
   --menuButton1-hover: #59824A;
   --menuButton2-hover: #cc9c00;
@@ -55,15 +56,18 @@ a {
   --form-border: #ff6900;
   --form-title: #f0f0f0;
   --form-button: #f08800;
-  --form-button-hover: #f06600;
+  --form-button-hover: var(--listMenu-backgroundActive);
   --form-input-background: #eaeaea;
 
-  --listMenu-background: #f0f0f0;
-  --listMenu-backgroundActive:#d0d0d0;
+  --listMenu-background1: #f0f0f0;
+  --listMenu-background2: #e0e0d0;
+  --listMenu-title: var(--text-highlight);
+  --listMenu-subtitle: var(--background);
+
+  --listMenu-backgroundActive:#c56c3f;
   --listMenu-backgroundOption:#f0f0f0;
-  --listMenu-title: black;
-  --listMenu-options: black;
-  --listMenu-buttons: black;
+  --listMenu-options: var(--background2);
+  --listMenu-buttons: var(--background2);
 
   /* --listMenu-background: #171412;
   --listMenu-backgroundActive:#222222;
