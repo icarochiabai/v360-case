@@ -1,6 +1,6 @@
 import { SelectedTask, TasksContext, TasksDispatchContext, TasksProvider, useIdCounter, useIsEditing, useSelectedTaskIndex } from '@/context/TasksContext'
 import styles from './menu.module.css'
-import { useContext, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { FormContext, useDescription, useIsVisible, useMode, usePriority, useTitle } from '../../context/FormContext';
 import Head from 'next/head';
 import { ListDispatchContext, useCurrentListIndex, useLists } from '@/context/ListsContext';
@@ -71,6 +71,7 @@ export default function Menu(props) {
         const { idCounter, setIdCounter } = useIdCounter();
         const { isEditing, setIsEditing } = useIsEditing();
         const [ name, setName ] = useState("");
+        let textInput;
 
         const handleListSelect = (listId) => {
             setSelectedTaskIndex(null);
@@ -89,20 +90,23 @@ export default function Menu(props) {
 
         const handleListEdit = (index) => {
             setIsEditing([!isEditing[0], index]);
-            setName(lists[index].name);
+            setName("");
+            console.log(textInput);
         };
         
         const handleEnter = (e, index) => {
             if(e.keyCode == 13) {
-                lists[index].name = name;
-                setIsEditing([!isEditing[0], index]);
+                if(name != ""){
+                    lists[index].name = name;
+                    setIsEditing([!isEditing[0], index]);
+                }
             }
         };
 
         return (
             <div className={styles.listMenu}>
+                <h1 className={styles.title}>TO-DO<span className={styles.subtitle}>LISTER</span></h1>
                 <div className={styles.lists}>
-                    <h1>Listas</h1>
                     {lists.map(
                         (list) => (
                             isEditing[0] && lists[isEditing[1]].id == list.id ?
@@ -112,6 +116,8 @@ export default function Menu(props) {
                                 value={ isEditing[0] ? name : list.name}
                                 onChange={(e) => setName(e.target.value)}
                                 onKeyUp={(e) => handleEnter(e, currentListIndex)}
+                                ref={(ti) => textInput = ti}
+                                placeholder="Type new title..."
                             /> 
                             :
                             <h2

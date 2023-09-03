@@ -46,35 +46,90 @@
     position: fixed;
     left: 0;
     min-width: 200px;
-    background-color: var(--listMenu-background);
-    box-shadow: 10px 0px 10px #171412;
+    max-width: 200px;
+
+    background-image: linear-gradient(
+        to bottom right,
+        var(--listMenu-background1),
+        var(--listMenu-background2)
+    );
 }
 
-.lists h1 {
+.title {
     padding: 1rem;
     padding-bottom: 0.5rem;
+    padding-right: 0;
     color: var(--listMenu-title);
-    border-bottom: 1px solid var(--text-highlight);
-    font-weight: 400;
+    font-weight: bolder;
 }
+
+.subtitle {
+    font-weight: bold;
+    font-size: small;
+    color: var(--listMenu-subtitle)
+}
+
+.lists {
+    overflow-y: scroll;
+    border-top: 2px dashed var(--text-highlight);
+    height: 100%;
+    transition: all 0.2s ease-in-out;
+}
+
+/* width */
+.lists::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  /* Track */
+.lists::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+.lists::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+.lists::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 
 .lists h2 {
     color: var(--listMenu-options);
     font-weight: 300;
     padding-left: 1rem;
-    padding-top: 4px;
-    padding-bottom: 4px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     font-size: medium;
-    background-color: var(--listMenu-backgroundOption);
+
+    transition: all 0.2s ease-in-out;
 }
 
-.lists h2:hover { 
-    background-color: var(--listMenu-backgroundActive);
-    cursor: pointer;
-}
-
+.lists h2:hover,
 .lists h2[data-selected="true"] {
-    background-color: var(--listMenu-backgroundActive);
+    cursor: pointer;
+    background-color: var(--listMenu-backgroundActive) !important;
+    color: var(--listMenu-background1);
+    font-weight: bolder;
+}
+
+.lists input {
+    max-width: 95%;
+    padding-left: 1rem;
+    padding-bottom: 8px;
+    padding-top: 8px;
+
+    border: none;
+    
+    font-size: medium;
+    font-weight: 300;
+    vertical-align: bottom;
+    background-color: #fff;
+
+    border: 1px solid var(--listMenu-backgroundActive);
+    
 }
 
 .listButtons {
@@ -82,11 +137,11 @@
     flex-direction: column;
 
     border-top: 2px solid var(--text-highlight);
-    background-color: var(--listMenu-backgroundOption);
 }
 .listButtons h2 {
+    transition: all 0.2s ease-in;
     font-size: medium;
-    font-weight: 200;
+    font-weight: 300;
     color: var(--listMenu-buttons);
     padding:0.5rem;
     padding-left: 1rem;
@@ -94,7 +149,16 @@
 
 .listButtons h2:hover {
     cursor: pointer;
-    background-color: var(--listMenu-backgroundActive);
+    background-color: var(--listMenu-backgroundActive) !important;
+    color: var(--listMenu-background1);
+    font-weight: bolder;
 }
 
-
+.listButtons {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
