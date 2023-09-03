@@ -3,6 +3,7 @@ import styles from './form.module.css'
 import { FormContext, useDescription, useIsVisible, useMode, usePriority, useTitle } from '../../context/FormContext';
 import { TasksContext, TasksDispatchContext, useIdCounter, useSelectedTaskIndex, useTasks } from '@/context/TasksContext';
 import Task from '../task/task';
+import { useCurrentListIndex, useLists } from '@/context/ListsContext';
 
 export default function Form(props) {
     const context = useContext(TasksContext);
@@ -15,6 +16,9 @@ export default function Form(props) {
     const { selectedTaskIndex, setSelectedTaskIndex } = useSelectedTaskIndex();
     const { mode, setMode } = useMode();
     const tasks = useContext(TasksContext)["tasks"];
+
+    const { lists, setLists } = useLists();
+    const { currentListIndex, setCurrentListIndex } = useCurrentListIndex();
 
     const { idCounter, setIdCounter } = useIdCounter();
 
@@ -32,7 +36,8 @@ export default function Form(props) {
                 setIsVisible(false);
                 dispatch({
                     type:'changed',
-                    tasks,
+                    lists,
+                    currentListIndex,
                     selectedTaskIndex,
                     name: title,
                     description: description,
@@ -48,6 +53,8 @@ export default function Form(props) {
                     description: description,
                     priority: priority,
                     isChecked: false,
+                    lists,
+                    currentListIndex
                 });
             }
             dispatch({

@@ -1,11 +1,30 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './task.module.css'
-import { useIsEditing } from '@/context/TasksContext';
+import { TasksContext, TasksDispatchContext, useIsEditing, useSelectedTaskIndex } from '@/context/TasksContext';
+import { useCurrentListIndex, useLists } from '@/context/ListsContext';
 
 export default function Task(props) {
+  const { selectedTaskIndex, setSelectedTaskIndex } = useSelectedTaskIndex();
+  const { lists, setLists } = useLists();
+  const { currentListIndex, setCurrentListIndex } = useCurrentListIndex();
+  const dispatch = useContext(TasksDispatchContext);
+
+  const handleCheck = (taskId) => {
+    for(let i = 0; i < lists[currentListIndex].tasks.length; i++){
+      if(lists[currentListIndex].tasks[i].id == taskId) {
+        dispatch({
+          type: 'checked',
+          lists,
+          currentListIndex,
+          i
+        });
+      }
+    }
+  };
+
   return (
     <div className={styles.wrapper}>
-      <input type="checkbox"></input>
+      <input onClick={ () => handleCheck(props.id)} type="checkbox" defaultChecked={props.isChecked}></input>
       <div className={styles.box} data-active={props.isSelected} onClick={props.onSelect}>
         <div className={styles.top}>
           <h2 className={styles.title}>{props.name}</h2>
