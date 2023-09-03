@@ -8,6 +8,8 @@
 }
 
 .listName {
-    color:var(--text-highlight);
+    color:var(--listMenu-background1);
+    padding-bottom: 0.2rem;
     margin-bottom: 1rem;
+    border-bottom: 3px solid var(--text-highlight);
 }

@@ -9,12 +9,12 @@
     border-radius: 0.5rem;
 
     background-color: var(--task-background);
-    transition: background-color 0.4s ease-out;
     font-size: 0.75rem;
     overflow-y: hidden;
     min-height: 2.5rem;
     max-height: 2.5rem;
-    transition: max-height 0.2s linear;
+    transition: all 0.4s ease-out;
+
 }
 
 .box h2 {
@@ -107,7 +107,8 @@
 }
 
 .wrapper input:checked ~ .box:hover {
-    background-color: var(--task-background);
+    transition: all 0.2s ease-out;
+    background-color: var(--task-backgroundActive-checked);
 }
 
 .wrapper input:checked ~ .box:hover h2 {
@@ -116,11 +117,13 @@
 
 .wrapper input:checked ~ .box:hover p,
 .wrapper input:checked ~ .box:hover i {
-    color: var(--task-desc-dark);
+    color: var(--task-desc-light);
 }
 
 .wrapper input:checked ~ .box[data-active="true"] {
-    background-color: var(--task-background);
+    transition: background-color 0.4s ease-out;
+    transition: all 0.2s ease-out;
+    background-color: var(--task-backgroundActive-checked);
     max-height: 4rem;
 }
 
@@ -130,7 +133,7 @@
 
 .wrapper input:checked ~ .box[data-active="true"] i,
 .wrapper input:checked ~ .box[data-active="true"] p {
-    color: var(--task-desc-dark);
+    color: var(--task-desc-light);
 }
 
 

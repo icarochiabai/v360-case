@@ -17,7 +17,7 @@ export default function Home() {
           <main className={styles.app}>
             <div className={styles.header}>
               <h1>V360</h1>
-              <h2>Case</h2>
+              <h2>CASE</h2>
             </div>
 
             <Form/>
