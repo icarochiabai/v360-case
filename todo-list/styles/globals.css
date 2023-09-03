@@ -65,6 +65,7 @@ a {
   --listMenu-subtitle: var(--background);
 
   --listMenu-backgroundActive:#c56c3f;
+  --listMenu-backgroundHover:#D28B68;
   --listMenu-backgroundOption:#f0f0f0;
   --listMenu-options: var(--background2);
   --listMenu-buttons: var(--background2);
