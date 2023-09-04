@@ -68,6 +68,7 @@ function listReducer(lists, action) {
         return [...lists, {
             id: action.id+1,
             name: "New list " + lists.length,
+            isEditing: false,
             tasks: []
         }
         ];

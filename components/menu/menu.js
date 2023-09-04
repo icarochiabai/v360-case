@@ -136,14 +136,12 @@ export default function Menu(props) {
                     <h2
                         onClick={ () => {
                             listSelect();
+                            setIsEditing(false, null);
                             setIdCounter(idCounter + 1);
                             listDispatch({
                                 type: 'added',
                                 id: idCounter,
                             });
-                            setCurrentListIndex(lists.length);
-                            handleListEdit(lists.length-1);
-                            handleListEdit(lists.length);
                         } }
                     >
                         Add list
