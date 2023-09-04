@@ -35,6 +35,7 @@ export default function Menu(props) {
                         setSelectedTaskIndex(null);
                         setIsVisible(!isVisible);
                         setMode('adding');
+                        listSelect();
                     }
                     }
                     className={styles.button1}
@@ -42,6 +43,7 @@ export default function Menu(props) {
                         <i className="fa-solid fa-plus"></i>
                     </button>
                     <button onClick={ () => {
+                        listSelect();
                         if(selectedTaskIndex != null) {
                             setTitle(tasks[selectedTaskIndex].name);
                             setDescription(tasks[selectedTaskIndex].description);
@@ -55,6 +57,7 @@ export default function Menu(props) {
                         <i className="fa-solid fa-pencil"></i>
                     </button>
                     <button onClick={ () => {
+                        listSelect();
                         dispatch({
                         type:'deleted',
                         lists,
@@ -91,7 +94,6 @@ export default function Menu(props) {
         const handleListEdit = (index) => {
             setIsEditing([!isEditing[0], index]);
             setName("");
-            console.log(textInput);
         };
         
         const handleEnter = (e, index) => {
@@ -118,7 +120,7 @@ export default function Menu(props) {
                                 onKeyUp={(e) => handleEnter(e, currentListIndex)}
                                 ref={(ti) => textInput = ti}
                                 placeholder="Type new title..."
-                            /> 
+                            autoFocus={true} /> 
                             :
                             <h2
                                 key={list.id} 
@@ -133,25 +135,33 @@ export default function Menu(props) {
                 <div className={styles.listButtons}>
                     <h2
                         onClick={ () => {
+                            listSelect();
                             setIdCounter(idCounter + 1);
-                            setIsEditing([false, null]);
                             listDispatch({
                                 type: 'added',
                                 id: idCounter,
                             });
+                            setCurrentListIndex(lists.length);
+                            handleListEdit(lists.length-1);
+                            handleListEdit(lists.length);
                         } }
                     >
                         Add list
                     </h2>
 
                     <h2
-                        onClick={ () => handleListEdit(currentListIndex) } 
+                        onClick={ () => {
+                            listSelect();
+                            handleListEdit(currentListIndex) 
+                        }   
+                        } 
                     >
                         Rename list
                     </h2>
 
                     <h2
                         onClick={ () => {
+                            listSelect();
                             if(lists.length > 1){
                                 setIsEditing([false, null]);
                                 listDispatch({
