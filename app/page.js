@@ -8,9 +8,12 @@ import Form from '@/components/form/form'
 import { FormProvider } from '@/context/FormContext'
 import Head from 'next/head'
 import { ListProvider } from '@/context/ListsContext'
+import useSound from 'use-sound';
+import listSelectSound from '/public/sound/taskSelect.mp3';
 
 export default function Home() {
   const [ menuState, setMenuState ] = useState('hidden');
+  const [ buttonSelect ] = useSound(listSelectSound);
   return (
     <ListProvider>
       <TasksProvider>
@@ -18,7 +21,11 @@ export default function Home() {
           <main className={styles.app}>
             <div className={styles.menuBar} data-status={menuState}>
                 <i
-                  onClick={() => setMenuState(menuState == 'hidden' ? 'show' : 'hidden')}
+                  onClick={() => {
+                      buttonSelect();
+                      setMenuState(menuState == 'hidden' ? 'show' : 'hidden');
+                    }
+                  }
                   className={menuState=='hidden' ? "fa-solid fa-bars" : "fa-solid fa-xmark"}
                 >
                 </i>
