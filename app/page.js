@@ -34,6 +34,7 @@ export default function Home() {
             <div className={styles.listMenu} data-status={menuState}>
               <Menu
               menuType='list'
+              dataStatus={menuState}
               />
             </div>
             <div className={styles.taskMenu}>

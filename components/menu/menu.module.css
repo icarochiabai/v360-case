@@ -181,4 +181,7 @@
     .taskMenu[data-status="show"] {
         display: none;
     }
+    .title[data-status="show"] {
+        margin-left: 3rem;
+    }
 }
