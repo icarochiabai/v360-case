@@ -107,7 +107,7 @@ export default function Menu(props) {
 
         return (
             <div className={styles.listMenu}>
-                <h1 className={styles.title}>TO-DO<span className={styles.subtitle}>LISTER</span></h1>
+                <h1 data-status={props.dataStatus} className={styles.title}>TO-DO<span className={styles.subtitle}>LISTER</span></h1>
                 <div className={styles.lists}>
                     {lists.map(
                         (list) => (
