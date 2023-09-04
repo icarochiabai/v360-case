@@ -49,6 +49,10 @@
     font-weight: bold;
 }
 
+.menuBar {
+    display: none;
+}
+
 @media all and (min-width:321px) and (max-width: 600px) {
   /* put your css styles in here */
     .form::after {
