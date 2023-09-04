@@ -164,11 +164,21 @@
     font-weight: bolder;
 }
 
-.listButtons {
+.listMenu {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+@media all and (min-width:321px) and (max-width: 600px) {
+    .listMenu {
+        min-width: 70%;
+        z-index: 1;
+    }
+    .taskMenu[data-status="show"] {
+        display: none;
+    }
 }

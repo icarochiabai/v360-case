@@ -27,7 +27,7 @@ export default function Menu(props) {
     if(props.menuType === "task") {
 
         return (
-                <div className={styles.taskMenu}>
+                <div className={styles.taskMenu} data-status={props.dataStatus}>
                     <button onClick={ () => {
                         setTitle('');
                         setDescription('');
