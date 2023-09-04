@@ -1,34 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# To-do Lister
 
-## Getting Started
+## Descrição
 
-First, run the development server:
+A aplicação é uma lista de tarefas que é capaz de gerenciar múltiplas listas de tarefas, cada uma com sua listas de tarefas ~~(tem muita lista nessa frase)~~. O menu lateral é para gerenciamento das listas e o menu central para as tarefas.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+Utilizei Next.js, um framework para React.js que visa otimizar muitas coisas aproveitando-se de sites estáticos. Basicamente, o Next.js _builda_ o site numa versão estática e a utiliza para distribuir aos clientes com um tempo de resposta mais rápido do que se distribuisse versões dinâmicas do mesmo site.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A aplicação foi desenvolvida referente à vaga __V360 - Pessoa Desenvolvedora Full-Stack Estágio__. E encontra-se acessível neste [link](https://icarochiabai.github.io/v360-case/).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Funcionalidades
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Criar, editar e remover listas de tarefas.
+- Criar, editar e remover tarefas para cada lista.
 
-## Learn More
+## Responsividade
 
-To learn more about Next.js, take a look at the following resources:
+A aplicação possui Layouts para Desktop e Mobile! 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Acessibilidade
 
-## Deploy on Vercel
+Algumas coisas foram feitas levando em conta a acessibilidade, como cores e respostas sonoras de botões. Planeja-se melhorar ainda mais isso.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Permanência de dados
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Como trata-se de um _case_, achei desnecessário utilizar algum tipo de sistema para permanência de dados. Mas isso poderia ser facilmente implementado utilizando um banco de dados, cookies do navegador ou até mesmo um único arquivo json.
