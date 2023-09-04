@@ -42,7 +42,7 @@ jobs:
           elif [ -f "${{ github.workspace }}/todo-list/package.json" ]; then
             echo "manager=npm" >> $GITHUB_OUTPUT
             echo "command=ci" >> $GITHUB_OUTPUT
-            echo "runner=npx -w todo-list/.next --no-install" >> $GITHUB_OUTPUT
+            echo "runner=cd todo-list; npx --no-install" >> $GITHUB_OUTPUT
             exit 0
           else
             echo "Unable to determine package manager"
