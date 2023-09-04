@@ -8,17 +8,23 @@ import useSound from 'use-sound';
 import listSelectSound from '/public/sound/taskSelect.mp3';
 
 export default function Menu(props) {
+    const { isVisible, setIsVisible } = useIsVisible();
+    const tasks = useContext(TasksContext)["tasks"];
+    const { title, setTitle } = useTitle();
+    const { description, setDescription } = useDescription();
+    const { priority, setPriority } = usePriority();
+    const { mode, setMode } = useMode();
+    const { lists, setLists } = useLists();
+    const { currentListIndex, setCurrentListIndex } = useCurrentListIndex();
+    const { selectedTaskIndex, setSelectedTaskIndex } = useSelectedTaskIndex();
+    const dispatch = useContext(TasksDispatchContext);
+    const listDispatch = useContext(ListDispatchContext);
+    const { idCounter, setIdCounter } = useIdCounter();
+    const { isEditing, setIsEditing } = useIsEditing();
+    const [ name, setName ] = useState("");
+    let textInput;
+    const [ listSelect ] = useSound(listSelectSound);
     if(props.menuType === "task") {
-        const dispatch = useContext(TasksDispatchContext);
-        const { isVisible, setIsVisible } = useIsVisible();
-        const { selectedTaskIndex, setSelectedTaskIndex } = useSelectedTaskIndex();
-        const tasks = useContext(TasksContext)["tasks"];
-        const { title, setTitle } = useTitle();
-        const { description, setDescription } = useDescription();
-        const { priority, setPriority } = usePriority();
-        const { mode, setMode } = useMode();
-        const { lists, setLists } = useLists();
-        const { currentListIndex, setCurrentListIndex } = useCurrentListIndex();
 
         return (
                 <div className={styles.taskMenu}>
@@ -65,16 +71,6 @@ export default function Menu(props) {
                 </div>
         )
     } else if (props.menuType === "list") {
-        const { lists, setLists } = useLists();
-        const { currentListIndex, setCurrentListIndex } = useCurrentListIndex();
-        const { selectedTaskIndex, setSelectedTaskIndex } = useSelectedTaskIndex();
-        const dispatch = useContext(TasksDispatchContext);
-        const listDispatch = useContext(ListDispatchContext);
-        const { idCounter, setIdCounter } = useIdCounter();
-        const { isEditing, setIsEditing } = useIsEditing();
-        const [ name, setName ] = useState("");
-        let textInput;
-        const [ listSelect ] = useSound(listSelectSound);
 
         const handleListSelect = (listId) => {
             setSelectedTaskIndex(null);
