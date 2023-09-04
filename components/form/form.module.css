@@ -15,7 +15,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
-    background-color: var(--form-background);
+    background-color: var(--background);
     backdrop-filter: blur(1rem);
 
     transition: opacity 0.2s ease-in-out;
@@ -42,9 +42,9 @@
     background-position: 0 0, 100% 0, 100% 100%, 0 100%;
     background-image: 
         linear-gradient(#ff6900, #ff6900),
-        linear-gradient(transparent, transparent),
+        linear-gradient(var(--background), var(--background)),
         linear-gradient(#ff6900, #ff6900),
-        linear-gradient(transparent, transparent);
+        linear-gradient(var(--background), var(--background));
     animation: rotate 4s linear infinite;
 }
 	
